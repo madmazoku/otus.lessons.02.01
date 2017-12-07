@@ -99,11 +99,16 @@ int main(int argc, const char** argv)
     auto fl2 = [&offset](int a, int b) {
         offset += a + b;
     };
+    auto fl5 = [&](int a, int b) {
+        offset -= a + b;
+    };
     for(auto i = 0; i < 10; i++) {
         std::cout << "# " << i << '\n';
         std::cout << offset << '\n';
         fl2(5,6);
-        std::cout << offset << '\n';
+        std::cout << "fl2: " << offset << '\n';
+        fl5(5,6);
+        std::cout << "fl5: " << offset << '\n';
     }
 
     // lambda with all variables
@@ -128,6 +133,7 @@ int main(int argc, const char** argv)
     }
 
     // tuple
+    std::cout << std::endl << "tuple\n";
     auto rt = foo();
     std::cout << "0: " << std::get<0>(rt) << '\n';
     std::cout << "1: " << std::get<1>(rt) << '\n';
