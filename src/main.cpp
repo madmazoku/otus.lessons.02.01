@@ -4,7 +4,7 @@
 
 #include "../bin/version.h"
 
-struct xray 
+struct xray
 {
     xray()
     {
@@ -24,7 +24,7 @@ struct xray
     }
 };
 
-struct closure 
+struct closure
 {
     int m_offset;
     closure(const int &offset = 0) : m_offset(offset)
@@ -64,7 +64,7 @@ auto foo()
     return std::make_tuple(std::string("as"), std::string("qw"), 1);
 }
 
-int main(int argc, const char** argv) 
+int main(int argc, const char** argv)
 {
     auto console = spdlog::stdout_logger_st("console");
     auto wellcome = std::string("Application started, \"") + argv[0] + "\" version: " + boost::lexical_cast<std::string>(version());
@@ -86,14 +86,20 @@ int main(int argc, const char** argv)
 
     // lambda
     std::cout << std::endl << "lambda\n";
-    auto fl = [offset](int a, int b){return offset + a + b;};
-    std::cout << [offset](int a, int b){return offset + a + b;}(1, 2) << '\n';
+    auto fl = [offset](int a, int b) {
+        return offset + a + b;
+    };
+    std::cout << [offset](int a, int b) {
+        return offset + a + b;
+    }(1, 2) << '\n';
     std::cout << fl(3, 4) << '\n';
 
     // lambda with reference
     std::cout << std::endl << "lambda &offset\n";
-    auto fl2 = [&offset](int a, int b){ offset += a + b; };
-    for(auto i = 0;i < 10; i++) {
+    auto fl2 = [&offset](int a, int b) {
+        offset += a + b;
+    };
+    for(auto i = 0; i < 10; i++) {
         std::cout << "# " << i << '\n';
         std::cout << offset << '\n';
         fl2(5,6);
@@ -102,7 +108,9 @@ int main(int argc, const char** argv)
 
     // lambda with all variables
     std::cout << std::endl << "lambda reference\n";
-    auto fl3 = [=](int a, int b){ return offset + a + b; };
+    auto fl3 = [=](int a, int b) {
+        return offset + a + b;
+    };
     std::cout << fl3(7,8) << '\n';
 
     // xray
@@ -111,7 +119,10 @@ int main(int argc, const char** argv)
 
     for(int i = 0; i < 10; i++) {
         closure2 fc2(x);
-        auto fl4 = [&x](int a, int b){ x(); return a + b; };
+        auto fl4 = [&x](int a, int b) {
+            x();
+            return a + b;
+        };
         std::cout << "closure: " << fc2(1,i) << '\n';
         std::cout << "lambda: " << fl4(10, i) << '\n';
     }
