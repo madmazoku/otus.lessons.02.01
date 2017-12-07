@@ -54,8 +54,7 @@ int main(int argc, const char** argv)
 	xray x;
 
 	std::cout << "closure\n";
-	closure l(100);
-	std::cout << l(1,2) << std::endl;
+	std::cout << closure(100)(1,2) << std::endl;
 
 	console->info("Application finished successfully.");
 	return 0;
