@@ -47,14 +47,25 @@ int main(int argc, const char** argv)
 	auto wellcome = std::string("Application started, \"") + argv[0] + "\" version: " + boost::lexical_cast<std::string>(version());
 	console->info(wellcome);
 
+	// auto
+	std::cout << std::endl << "auto\n";
 	auto r = min(2, 1.1);
 	std::cout << "max: " << r << " type: " << typeid(r).name() << "\n";
 
-	std::cout << "xray\n";
+	// xray
+	std::cout << std::endl << "xray\n";
 	xray x;
 
+	// closure
 	std::cout << "closure\n";
-	std::cout << closure(100)(1,2) << std::endl;
+	std::cout << closure(100)(1,2) << '\n';
+	std::cout << closure(100)(1,2) << '\n';
+
+	// lambda
+	std::cout << std::endl << "lambda\n";
+	int offset = 100;
+	std::cout << [offset](int a, int b){return offset + a + b;}(1, 2) << '\n';
+
 
 	console->info("Application finished successfully.");
 	return 0;
