@@ -56,15 +56,20 @@ int main(int argc, const char** argv)
 	std::cout << std::endl << "xray\n";
 	xray x;
 
+	// offset
+	int offset = 100;
+
 	// closure
+	auto fc = closure(offset);
 	std::cout << "closure\n";
-	std::cout << closure(100)(1,2) << '\n';
-	std::cout << closure(100)(1,2) << '\n';
+	std::cout << closure(offset)(1,2) << '\n';
+	std::cout << fc(3,4) << '\n';
 
 	// lambda
 	std::cout << std::endl << "lambda\n";
-	int offset = 100;
+	auto fl = [offset](int a, int b){return offset + a + b;};
 	std::cout << [offset](int a, int b){return offset + a + b;}(1, 2) << '\n';
+	std::cout << fl(3, 4) << '\n';
 
 
 	console->info("Application finished successfully.");
